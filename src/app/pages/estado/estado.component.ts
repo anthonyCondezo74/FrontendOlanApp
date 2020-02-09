@@ -55,7 +55,7 @@ export class EstadoComponent implements OnInit {
   }
   
   eliminar(estado: Estado){
-    this.estadoService.eliminar(estado.idEstado).pipe(switchMap(() => {
+    this.estadoService.eliminar(estado.id).pipe(switchMap(() => {
       return this.estadoService.listar();
     })).subscribe(data => {
       this.estadoService.estadoCambio.next(data);

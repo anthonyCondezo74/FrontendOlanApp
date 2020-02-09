@@ -55,7 +55,7 @@ export class TipodocumentoComponent implements OnInit {
   
   eliminar(tipoDocumento: TipoDocumento){
 
-    this.tipoDocumentoService.eliminar(tipoDocumento.idTipoDocumento).pipe(switchMap(() => {
+    this.tipoDocumentoService.eliminar(tipoDocumento.id).pipe(switchMap(() => {
       return this.tipoDocumentoService.listar();
     })).subscribe(data => {
       this.tipoDocumentoService.tipoDocumentoCambio.next(data);

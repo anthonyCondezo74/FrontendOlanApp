@@ -16,7 +16,7 @@ constructor(private dialogref: MatDialogRef<ProductoDialogComponent>,@Inject(MAT
 
 ngOnInit() {
   this.producto= new Producto();
-  this.producto.idProducto = this.data.idProducto;
+  this.producto.id = this.data.id;
   this.producto.codigo = this.data.codigo;
   this.producto.nombre = this.data.nombre;
   this.producto.precio = parseFloat(this.data.precio).toFixed(2); // ).toFixed(2);
@@ -27,7 +27,7 @@ cancelar() {
 }
 
 operar(){
-  if(this.producto !=null && this.producto.idProducto  > 0){
+  if(this.producto !=null && this.producto.id  > 0){
     this.productoService.modificar(this.producto).pipe(switchMap(()=>{
       return this.productoService.listar();
     })).subscribe( productos =>{

@@ -23,7 +23,7 @@ constructor(private dialogref: MatDialogRef<TipodocumentoDialogComponent>,@Injec
 
 ngOnInit() {
   this.tipoDocumento= new TipoDocumento();
-  this.tipoDocumento.idTipoDocumento = this.data.idTipoDocumento;
+  this.tipoDocumento.id = this.data.id;
   this.tipoDocumento.nombre = this.data.nombre;
   this.tipoDocumento.descripcion=this.data.descripcion;
   this.tipoDocumento.estado = this.data.estado;
@@ -41,10 +41,10 @@ estadoBotonOperar() {
 
 operar(){
 
-  if(this.tipoDocumento !=null && this.tipoDocumento.idTipoDocumento  > 0){
+  if(this.tipoDocumento !=null && this.tipoDocumento.id  > 0){
 
     let tipoDocumento = new TipoDocumento();
-    tipoDocumento.idTipoDocumento=this.tipoDocumento.idTipoDocumento;
+    tipoDocumento.id=this.tipoDocumento.id;
     tipoDocumento.nombre=this.tipoDocumento.nombre;
     tipoDocumento.descripcion =this.tipoDocumento.descripcion;
     tipoDocumento.estado=this.idTipoDocumentoSeleccionado;

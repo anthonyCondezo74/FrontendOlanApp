@@ -1,5 +1,5 @@
 export class TipoCliente{
-    idTipoCliente: number;
+    id: number;
     nombre: string;
     descripcion:string;
     estado: string;

@@ -65,7 +65,7 @@ export class ProductoComponent implements OnInit {
       });
     });
 */
-    this.productoService.eliminar(producto.idProducto).pipe(switchMap(() => {
+    this.productoService.eliminar(producto.id).pipe(switchMap(() => {
       return this.productoService.listar();
     })).subscribe(data => {
       this.productoService.productoCambio.next(data);

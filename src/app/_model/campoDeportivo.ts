@@ -1,5 +1,5 @@
 export class CampoDeportivo{
-    idCampoDeportivo: number;
+    id: number;
     nombre: string;
     precio: number;
     estado: string;

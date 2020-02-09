@@ -22,7 +22,7 @@ export class CampodeportivoDialogComponent implements OnInit {
 
   ngOnInit() {
     this.campoDeportivo= new CampoDeportivo();
-    this.campoDeportivo.idCampoDeportivo = this.data.idCampoDeportivo;
+    this.campoDeportivo.id = this.data.id;
     this.campoDeportivo.nombre = this.data.nombre;
     this.campoDeportivo.precio=this.data.precio;
     this.campoDeportivo.estado = this.data.estado;
@@ -35,7 +35,7 @@ export class CampodeportivoDialogComponent implements OnInit {
 
   operar(){
 
-    if(this.campoDeportivo !=null && this.campoDeportivo.idCampoDeportivo  > 0){
+    if(this.campoDeportivo !=null && this.campoDeportivo.id  > 0){
       this.campoDeportivoService.modificar(this.campoDeportivo).pipe(switchMap(()=>{
         return this.campoDeportivoService.listar();
       })).subscribe( campoDeportivos =>{

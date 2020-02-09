@@ -19,7 +19,7 @@ constructor(private dialogref: MatDialogRef<EstadoDialogComponent>,@Inject(MAT_D
 ngOnInit() {
 
   this.estado= new Estado();
-  this.estado.idEstado = this.data.idEstado;
+  this.estado.id = this.data.id;
   this.estado.nombre = this.data.nombre;
   this.estado.estado = this.data.estado;
 
@@ -37,9 +37,9 @@ estadoBotonOperar() {
 operar(){
 
 
-  if(this.estado !=null && this.estado.idEstado  > 0){
+  if(this.estado !=null && this.estado.id  > 0){
     let estado = new Estado();
-    estado.idEstado=this.estado.idEstado;
+    estado.id=this.estado.id;
     estado.nombre=this.estado.nombre;
     estado.estado=this.idEstadoSeleccionado;
     this.estadoService.modificar(estado).pipe(switchMap(()=>{

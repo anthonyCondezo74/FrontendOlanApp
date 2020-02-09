@@ -53,9 +53,9 @@ export class ClienteComponent implements OnInit {
 
 aceptar(){
   let tipoDocumento = new TipoDocumento();
-  tipoDocumento.idTipoDocumento= this.idTipoDocumentoSeleccionado;
+  tipoDocumento.id= this.idTipoDocumentoSeleccionado;
   let tipoCliente = new TipoCliente();
-  tipoCliente.idTipoCliente= this.idTipoClienteSeleccionado
+  tipoCliente.id= this.idTipoClienteSeleccionado
 
 
   let cliente = new Cliente();

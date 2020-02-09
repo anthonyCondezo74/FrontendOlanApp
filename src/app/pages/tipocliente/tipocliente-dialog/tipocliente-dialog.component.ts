@@ -25,7 +25,7 @@ export class TipoclienteDialogComponent implements OnInit {
 
   ngOnInit() {
     this.tipoCliente= new TipoCliente();
-    this.tipoCliente.idTipoCliente = this.data.idTipoCliente;
+    this.tipoCliente.id = this.data.id;
     this.tipoCliente.nombre = this.data.nombre;
     this.tipoCliente.descripcion =this.data.descripcion;
     this.tipoCliente.estado = this.data.estado;
@@ -43,9 +43,9 @@ export class TipoclienteDialogComponent implements OnInit {
 
   operar(){
 console.log(this.idTipoClienteSeleccionado);
-    if(this.tipoCliente !=null && this.tipoCliente.idTipoCliente  > 0){
+    if(this.tipoCliente !=null && this.tipoCliente.id  > 0){
       let tipoCliente = new TipoCliente();
-      tipoCliente.idTipoCliente =this.tipoCliente.idTipoCliente;
+      tipoCliente.id =this.tipoCliente.id;
       tipoCliente.nombre=this.tipoCliente.nombre;
       tipoCliente.descripcion=this.tipoCliente.descripcion;
       tipoCliente.estado=this.idTipoClienteSeleccionado;

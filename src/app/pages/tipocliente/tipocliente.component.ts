@@ -55,7 +55,7 @@ export class TipoclienteComponent implements OnInit {
   
   eliminar(tipoCliente: TipoCliente){
 
-    this.tipoClienteService.eliminar(tipoCliente.idTipoCliente).pipe(switchMap(() => {
+    this.tipoClienteService.eliminar(tipoCliente.id).pipe(switchMap(() => {
       return this.tipoClienteService.listar();
     })).subscribe(data => {
       this.tipoClienteService.tipoClienteCambio.next(data);

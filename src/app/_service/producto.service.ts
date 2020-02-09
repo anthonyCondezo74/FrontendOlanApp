@@ -8,11 +8,11 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProductoService {
-  private HOST: string = 'http://localhost:9899';
+//  private HOST: string = 'http://localhost:9899';
   productoCambio = new Subject<Producto[]>();
   mensajeCambio = new Subject<string>();
-//  url: string = `${environment.HOST}/productos`;
-url: string = `${this.HOST}/productos`;
+ url: string = `${environment.HOST}/productos`;
+//url: string = `${this.HOST}/productos`;
   constructor(private http : HttpClient) { }
 
 listar(){

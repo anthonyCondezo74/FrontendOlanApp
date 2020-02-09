@@ -68,7 +68,7 @@ export class CampodeportivoComponent implements OnInit {
       });
     });
 */
-    this.campoDeportivoService.eliminar(campoDeportivo.idCampoDeportivo).pipe(switchMap(() => {
+    this.campoDeportivoService.eliminar(campoDeportivo.id).pipe(switchMap(() => {
       return this.campoDeportivoService.listar();
     })).subscribe(data => {
       this.campoDeportivoService.campoDeportivoCambio.next(data);

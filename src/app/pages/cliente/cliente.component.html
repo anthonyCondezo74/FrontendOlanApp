@@ -4,7 +4,7 @@
 
         <mat-form-field>
                 <mat-select placeholder="TipoCliente" [(value)]="idTipoClienteSeleccionado">
-                    <mat-option *ngFor="let p of tipoClientes" [value]="p.idTipoCliente">
+                    <mat-option *ngFor="let p of tipoClientes" [value]="p.id">
                         {{p.nombre}}
                     </mat-option>
                 </mat-select>
@@ -12,7 +12,7 @@
 
         <mat-form-field>
                 <mat-select placeholder="TipoDocumento" [(value)]="idTipoDocumentoSeleccionado">
-                    <mat-option *ngFor="let p of tipoDocumentos" [value]="p.idTipoDocumento">
+                    <mat-option *ngFor="let p of tipoDocumentos" [value]="p.id">
                         {{p.nombre}}
                     </mat-option>
                 </mat-select>
