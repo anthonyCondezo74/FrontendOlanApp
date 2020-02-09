@@ -1,0 +1,50 @@
+<mat-toolbar>Registro de Clientes</mat-toolbar>
+
+<div class="example-container">
+
+        <mat-form-field>
+                <mat-select placeholder="TipoCliente" [(value)]="idTipoClienteSeleccionado">
+                    <mat-option *ngFor="let p of tipoClientes" [value]="p.idTipoCliente">
+                        {{p.nombre}}
+                    </mat-option>
+                </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+                <mat-select placeholder="TipoDocumento" [(value)]="idTipoDocumentoSeleccionado">
+                    <mat-option *ngFor="let p of tipoDocumentos" [value]="p.idTipoDocumento">
+                        {{p.nombre}}
+                    </mat-option>
+                </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+                <input matInput placeholder="Numero de documento" [(ngModel)]="nroDocumento">
+        </mat-form-field>
+
+        <mat-form-field>
+                <input matInput placeholder="Nombres" [(ngModel)]="nombre">
+        </mat-form-field>
+        
+        <mat-form-field>
+                <input matInput placeholder="Apellidos" [(ngModel)]="apellido">
+        </mat-form-field>
+
+        <mat-form-field>
+                        <mat-select placeholder="Estado" [(value)]="idEstadoSeleccionado">
+                            <mat-option  value="A">ACTIVO </mat-option>
+                            <mat-option  value="I">INACTIVO </mat-option>
+                        </mat-select>
+        </mat-form-field>
+       
+        <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Fecha de registro" 
+             [(ngModel)]="fechaSeleccionada">
+         <!--    [max]="maxFecha" -->
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="aceptar()" >Registrar</button>
+        
+</div>    

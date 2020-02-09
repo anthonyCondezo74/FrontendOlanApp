@@ -1,0 +1,62 @@
+<mat-toolbar>Reservas OLAN</mat-toolbar>
+
+<form class="example-container" [formGroup]="form" (ngSubmit)="aceptar()" #consultaForm="ngForm">
+    <div class="example-container">
+
+                <mat-form-field>
+                        <mat-select placeholder="Campo Deportivo" [(value)]="campoDeportivoSeleccionado" formControlName="campoDeportivo">
+                            <mat-option *ngFor="let e of campoDeportivos" [value]="e">
+                                {{ e.nombre }}
+                            </mat-option>
+                        </mat-select>
+                </mat-form-field>
+
+
+            <mat-form-field>
+                    <input type="text" placeholder="Cliente" matInput [matAutocomplete]="autoCliente"
+                        [formControl]="myControlCliente" formControlName="cliente">
+            </mat-form-field>
+            <mat-autocomplete #autoCliente="matAutocomplete" [displayWith]="displayFnCliente"
+            (optionSelected)="seleccionarCliente($event)">
+            <mat-option *ngFor="let p of filteredOptionsCliente | async" [value]="p">
+                {{ p.nombre }} {{p.apellido}}
+            </mat-option>
+            </mat-autocomplete>
+
+            <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="Escoge una fecha" 
+                        formControlName="fecha">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                    <input matInput [matDatepicker]="pickerTo" placeholder="Escoge una hora" 
+                        formControlName="hora">
+                    <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerTo></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                    <input matInput placeholder="Tiempo" [(ngModel)]="tiempo" formControlName="tiempo">
+            </mat-form-field>
+
+            <mat-form-field>
+                    <input matInput placeholder="Precio" [(ngModel)]="precio" formControlName="precio">
+            </mat-form-field>
+
+            <mat-form-field>
+                    <mat-select placeholder="Estado" [(value)]="estadoSeleccionado" formControlName="estado">
+                        <mat-option *ngFor="let e of estados" [value]="e">
+                            {{ e.nombre }}
+                        </mat-option>
+                    </mat-select>
+            </mat-form-field>
+            <button mat-raised-button color="primary"  type="submit" >Registrar</button>
+            
+    </div>
+</form>
+
+
+
+
+
