@@ -1,11 +1,23 @@
 .example-container{
-    display: flex;
-    flex-direction: column;
-  }
-  .example-container>*{
+  display: flex;
+  flex-direction: column;
+ margin:1rem auto;
+   max-width: 1000px;
+}
+/*
+.example-container>*{
     width: 100%;
   }
-  
+ */ 
   .example-spacer {
     flex: 1 1 auto;
+  }
+
+  .example-card {
+    max-width: 1000px;
+  }
+  .example-card-actions {
+    margin: auto;
+    width: 20%;
+    padding: 10px;
   }

@@ -55,12 +55,13 @@ export class ReservaComponent implements OnInit {
   filteredOptionsCampoDeportivo: Observable<any[]>;
   filteredOptionsEstado: Observable<any[]>;
 
-  constructor(private clienteService:ClienteService, private campoDeportivoService:CampoDeportivoService, private estadoService:EstadoService, private reservaService: ReservaService, private snackbar:MatSnackBar ) { }
+  constructor(private clienteService:ClienteService, private campoDeportivoService:CampoDeportivoService, 
+    private estadoService:EstadoService, private reservaService: ReservaService, private snackbar:MatSnackBar ) { }
 
   ngOnInit() {
 this.form = new FormGroup({
 'campoDeportivo': new FormControl,
-'cliente':this.myControlCliente,
+'cliente': this.myControlCliente,
 'fecha':new FormControl(new Date()),
 'hora':new FormControl(new Date()),
 'tiempo':new FormControl,
@@ -74,17 +75,20 @@ this.filteredOptionsCliente = this.myControlCliente.valueChanges.pipe(map(val =>
 
 }
 filterCliente(val: any) {
+
   console.log(val);
-  if (val != null && val.idCliente > 0) {
+  if (val != null && val.idCliente > 0) {  //nroDocumento
     return this.clientes.filter(option =>
-      option.nombre.toLowerCase().includes(val.nombre.toLowerCase()) || option.apellido.toLowerCase().includes(val.apellido.toLowerCase()));
+    option.nroDocumento.toLowerCase().includes(val.nroDocumento.toLowerCase()));
+
+    //option.nombre.toLowerCase().includes(val.nombre.toLowerCase()) || option.apellidoPaterno.toLowerCase().includes(val.apellidoPaterno.toLowerCase())|| option.apellidoMaterno.toLowerCase().includes(val.apellidoMaterno.toLowerCase()));
+ 
   } else {
     return this.clientes.filter(option =>
-      option.nombre.toLowerCase().includes(val.toLowerCase()) || option.apellido.toLowerCase().includes(val.toLowerCase()) );
+      option.nroDocumento.toLowerCase().includes(val.toLowerCase()));
+      //    option.nombre.toLowerCase().includes(val.toLowerCase()) || option.apellidoPaterno.toLowerCase().includes(val.toLowerCase()) || option.apellidoMaterno.toLowerCase().includes(val.toLowerCase()) );
   }
 }
-
-
 
 listaCampoDeportivo(){
 this.campoDeportivoService.listar().subscribe(data =>{
@@ -105,7 +109,16 @@ this.estadoService.listar().subscribe(data =>{
 }
 
 displayFnCliente(val: Cliente) {
-  return val ? `${val.nombre} ${val.apellido}` : val;
+  debugger;
+  if(val.razonSocial==null){
+    val.razonSocial="";
+  }
+  if(val.nombre==null && val.apellidoPaterno==null ){
+    val.nombre="";
+    val.apellidoPaterno="";
+  }
+
+  return val ? `${val.nombre} ${val.apellidoPaterno} ${val.razonSocial}` : val;
 }
 
 seleccionarCliente(e: any) {
@@ -142,7 +155,7 @@ aceptar(){
   //  let localISOTime2 =(new Date(Date.now() - tzoffset2)).toISOString();
   //  console.log(localISOTime2);
   //  reserva.hora=localISOTime; //yyyy-mm-ddTHH:mm:ss
-debugger;
+
     this.reservaService.registrar(reserva).subscribe(()=>{
       this.snackbar.open("se registro","aviso",{duration: 2000});
       

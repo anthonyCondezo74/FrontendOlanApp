@@ -8,11 +8,11 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TipodocumentoService {
-//  private HOST: string = 'http://localhost:9899';
+ private HOST: string = 'http://olancorp.com:30001';
   tipoDocumentoCambio = new Subject<TipoDocumento[]>();
   mensajeCambio = new Subject<string>();
- url: string = `${environment.HOST}/TipoDocumentos`;
-//  url: string = `${this.HOST}/TipoDocumentos`;
+// url: string = `${environment.HOST}/api/v1/tipo-documentos`;
+  url: string = `${this.HOST}/api/v1/tipo-documentos`;
   
   constructor(private http : HttpClient) { }
 

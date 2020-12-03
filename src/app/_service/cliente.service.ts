@@ -8,11 +8,11 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ClienteService {
- // private HOST: string = 'http://localhost:9899';
+  private HOST: string = 'http://olancorp.com:30001';
   clienteCambio = new Subject<Cliente[]>();
   mensajeCambio = new Subject<string>();
- url: string = `${environment.HOST}/clientes`;
- //url: string = `${this.HOST}/clientes`;
+// url: string = `${environment.HOST}/api/v1/clientes`;
+url: string = `${this.HOST}/api/v1/clientes`;
   constructor(private http : HttpClient) { }
 
 listar(){

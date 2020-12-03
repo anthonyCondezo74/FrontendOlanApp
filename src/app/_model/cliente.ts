@@ -4,9 +4,12 @@ export class Cliente{
     id: number;
     tipoCliente: TipoCliente;
     tipoDocumento: TipoDocumento;
-    nroDocumento: number;
+    nroDocumento: string;
     nombre: string;
-    apellido: string;
+    apellidoPaterno: string;
+    apellidoMaterno: string;
+    razonSocial: string;
+    celular: string;
     estado: string;
-    fecha: string;
+    fechaRegistro: string;
 }

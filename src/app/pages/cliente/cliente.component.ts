@@ -1,14 +1,8 @@
-
-import { MatSnackBar } from '@angular/material';
-import { TipoclienteService } from 'src/app/_service/tipocliente.service';
-import { TipoDocumento } from 'src/app/_model/tipodocumento';
-import { Component, OnInit } from '@angular/core';
-import { TipoCliente } from 'src/app/_model/tipocliente';
-import { TipodocumentoService } from 'src/app/_service/tipodocumento.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Cliente } from 'src/app/_model/cliente';
+import { MatTableDataSource, MatSort, MatPaginator, MatSnackBar } from '@angular/material';
 import { ClienteService } from 'src/app/_service/cliente.service';
-
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cliente',
@@ -16,70 +10,60 @@ import { ClienteService } from 'src/app/_service/cliente.service';
   styleUrls: ['./cliente.component.css']
 })
 export class ClienteComponent implements OnInit {
-
-  tipoDocumentos : TipoDocumento []=[]
-  tipoClientes : TipoCliente []=[]
-
-  idTipoDocumentoSeleccionado: number;
-  idTipoClienteSeleccionado: number;
-
-  fechaSeleccionada: Date = new Date();
-
-  nroDocumento: number;
-  nombre: string;
-  apellido: string;
-  estado: string;
-  idEstadoSeleccionado: string;
-
-  constructor(private tipoDocumentoService:TipodocumentoService, private tipoClienteService: TipoclienteService, private clienteService: ClienteService, private snackbar:MatSnackBar ) { }
+  dataSource: MatTableDataSource<Cliente>;
+  displayedColumns=['id','nroDocumento','razonSocial','apellidoPaterno','apellidoMaterno','nombre','celular','acciones'];
+  @ViewChild(MatSort,{static:true}) sort:MatSort;
+  @ViewChild(MatPaginator,{static:true}) paginator:MatPaginator;
+  cantidad: number = 0;
+  constructor(private clienteService: ClienteService, private snackBar: MatSnackBar, public route:ActivatedRoute ) { }
 
   ngOnInit() {
+    this.clienteService.clienteCambio.subscribe(data =>{
+      this.dataSource =new MatTableDataSource(data);
+      this.dataSource.sort= this.sort;
+      this.dataSource.paginator=this.paginator;
+    });
 
-    this.listaTipoDocumento();
-    this.listaTipoCliente();
+    this.clienteService.mensajeCambio.subscribe(data =>{
+      this.snackBar.open(data , "AVISO",{
+        duration:2000
+      });
+    });
+
+   /*LISTA SIN PAGINADO
+    this.clienteService.listar().subscribe(data => {
+      this.dataSource =new MatTableDataSource(data);
+      this.dataSource.sort= this.sort;
+      this.dataSource.paginator=this.paginator;
+    });
+*/
+    this.clienteService.listarPageable(0,10).subscribe(data => {
+      this.cantidad = data.totalElements;
+      this.dataSource =new MatTableDataSource(data.content);
+      this.dataSource.sort= this.sort;
+      this.dataSource.paginator=this.paginator;
+    });
 
   }
+  mostrarMas(e:any){
+    this.clienteService.listarPageable(e.pageIndex, e.pageSize).subscribe(data =>{
+      this.cantidad= data.totalElements;
+      this.dataSource =new MatTableDataSource(data.content);
+      this.dataSource.sort= this.sort;
+     // ya no es necesario carga la primera vez this.dataSource.paginator=this.paginator;
+    }) ;
+  }
 
-  listaTipoDocumento(){
-    this.tipoDocumentoService.listar().subscribe(data=>{
-      this.tipoDocumentos= data;
+  filtrar(valor: string){
+    this.dataSource.filter = valor.trim().toLowerCase();
+  }
+
+  eliminar(id: number){
+    this.clienteService.eliminar(id).subscribe( () =>{ 
+      this.clienteService.listar().subscribe(data =>{
+        this.clienteService.clienteCambio.next(data);
+        this.clienteService.mensajeCambio.next('Se elimino');
+      })
     })
   }
-  listaTipoCliente(){
-    this.tipoClienteService.listar().subscribe(data=>{
-      this.tipoClientes= data;
-    })
-  }
-
-aceptar(){
-  let tipoDocumento = new TipoDocumento();
-  tipoDocumento.id= this.idTipoDocumentoSeleccionado;
-  let tipoCliente = new TipoCliente();
-  tipoCliente.id= this.idTipoClienteSeleccionado
-
-
-  let cliente = new Cliente();
-  cliente.tipoDocumento=tipoDocumento;
-  cliente.tipoCliente=tipoCliente;
-  cliente.nroDocumento= this.nroDocumento;
-  cliente.nombre =this.nombre;
-  cliente.apellido=this.apellido;
-  cliente.estado=this.idEstadoSeleccionado;
-
-  //IZO DATE
-let tzoffset=(this.fechaSeleccionada).getTimezoneOffset()* 60000;
-let localISOTime =(new Date(Date.now() - tzoffset)).toISOString();
-console.log(localISOTime);
-cliente.fecha=localISOTime; //yyyy-mm-ddTHH:mm:ss
-
-debugger;
-this.clienteService.registrar(cliente).subscribe(()=>{
-  this.snackbar.open("se registro","aviso",{duration: 2000});
-  
-  setTimeout(() => {
-//    this.limpiarControles();
-  }, 2000);
-})
-
-}
 }

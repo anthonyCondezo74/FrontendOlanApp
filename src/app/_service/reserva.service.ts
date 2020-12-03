@@ -10,11 +10,11 @@ import { ConsultaResumenDTO } from '../_dto/consultaResumenDTO';
   providedIn: 'root'
 })
 export class ReservaService {
-//  private HOST: string = 'http://localhost:9899';
+  private HOST: string = 'http://olancorp.com:30001';
   reservaCambio = new Subject<Reserva[]>();
   mensajeCambio = new Subject<string>();
- url: string = `${environment.HOST}/reservas`;
-// url: string = `${this.HOST}/reservas`;
+// url: string = `${environment.HOST}/reservas`;
+ url: string = `${this.HOST}/api/v1/reservas`;
  
   constructor(private http : HttpClient) { }
 

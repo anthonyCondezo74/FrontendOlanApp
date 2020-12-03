@@ -8,11 +8,11 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class EstadoService {
- // private HOST: string = 'http://localhost:9899';
+  private HOST: string = 'http://olancorp.com:30001';
   estadoCambio = new Subject<Estado[]>();
   mensajeCambio = new Subject<string>();
- url: string = `${environment.HOST}/estados`;
- //url: string = `${this.HOST}/estados`;
+// url: string = `${environment.HOST}/api/v1/estados`;
+ url: string = `${this.HOST}/api/v1/estados`;
   constructor(private http : HttpClient) { }
 
 listar(){

@@ -10,12 +10,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CampoDeportivoService {
 
-//  private HOST: string = 'http://localhost:9899';
+  private HOST: string = 'http://olancorp.com:30001';
 
   campoDeportivoCambio = new Subject<CampoDeportivo[]>();
   mensajeCambio = new Subject<string>();
-  url: string = `${environment.HOST}/campoDeportivos`;
-  //url: string = `${this.HOST}/campoDeportivos`;
+ // url: string = `${environment.HOST}/api/v1/campos-deportivos`;
+ url: string = `${this.HOST}/api/v1/campos-deportivos`;
   constructor(private http : HttpClient) { }
 
 listar(){
